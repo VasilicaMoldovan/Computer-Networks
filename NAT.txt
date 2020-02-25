@@ -1,0 +1,26 @@
+***dinamic***
+
+
+
+access-list 1 permis 192.. 0.0.0.31
+ip nat pool ISP 193.. 193.. netmask 255..
+interface care ii(fast de obicei)
+ip nat inside 
+exit 
+interface care ii( serial)
+ip nat outside 
+exit
+ip nat inside source list 1 pool ISP overload
+
+
+
+***static***
+
+ip nat inside source static (ip sursa) (ip dest)
+//linia de sus se executa pt fiecare sursa trimisa
+interface care ii(fast de obicei)
+ip nat inside 
+exit 
+interface care ii( serial)
+ip nat outside 
+exit

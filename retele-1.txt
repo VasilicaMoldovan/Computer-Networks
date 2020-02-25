@@ -1,0 +1,41 @@
+---- config router ----
+enable
+configure terminal
+int fa0/0
+ip addr (ip router) (netmask)
+no shutdown
+
+---- DHCP server ----
+server  -> ip config: set IP addr, subnet, def gateway
+	-> services -> dhcp: on, def gateway, start ip addr(router ip addr), subnet mask
+PC -> ip config: dhcp
+
+---- DNS server ----
+server  -> ip config: set IP addr, subnet, def gateway
+	-> services-> dns: on, make a link with the IP addr
+PC -> add DNS server
+
+---- WEB server ---- ??????
+server  -> ip config: set IP addr, subnet, DNS server, def gateway
+	-> http: set dns server 
+
+---- acces point ----
+connect acces point and switch with automatic connection
+port1 -> change name(p1)
+laptop  -> physical: remove cfe, add wpc
+	-> wireless SSID: p1
+
+---- Wireless Router ----
+WR -> config -> internet: set static, def gateway, ip addr, subnet mask
+	     -> wireless: rename SSID, WPA2-PSK + pass, encryption type - AES 
+
+   -> GUI - DHCP server: set static DNS1
+	  - internet setup: set DNS1
+PC -> remove cfe, add wireless
+   -> pc wireless: connect to wifi
+
+
+---- rip ----
+router  -> enable, conf t, router rip, version 2, no auto-summary, network (ip. of networks)
+
+ip route 0.0.0.0 0.0.0.0 fa0/0
